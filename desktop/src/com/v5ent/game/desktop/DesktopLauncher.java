@@ -1,12 +1,23 @@
 package com.v5ent.game.desktop;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.v5ent.game.MyGdxGame;
+import com.v5ent.game.MyRpgGame;
 
 public class DesktopLauncher {
-	public static void main (String[] arg) {
+	public static void main(String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new MyGdxGame(), config);
+		config.title = "Simple RPG";
+		config.useGL30 = false;
+		config.width = 800;
+		config.height = 600;
+		Application app = new LwjglApplication(new MyRpgGame(), config);
+		Gdx.app = app;
+		// Gdx.app.setLogLevel(Application.LOG_INFO);
+		Gdx.app.setLogLevel(Application.LOG_DEBUG);
+		// Gdx.app.setLogLevel(Application.LOG_ERROR);
+		// Gdx.app.setLogLevel(Application.LOG_NONE);
 	}
 }
