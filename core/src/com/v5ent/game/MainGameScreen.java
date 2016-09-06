@@ -30,10 +30,10 @@ public class MainGameScreen implements Screen {
 	private Sprite _currentPlayerSprite;
 	private OrthogonalTiledMapRenderer _mapRenderer = null;
 	private OrthographicCamera _camera = null;
-	private static MapManager _mapMgr;
+	private static MapManager mapMgr;
 
 	public MainGameScreen() {
-		_mapMgr = new MapManager();
+		mapMgr = new MapManager();
 	}
 
 	private static Entity _player;
@@ -45,11 +45,11 @@ public class MainGameScreen implements Screen {
 		// get the current size
 		_camera = new OrthographicCamera();
 		_camera.setToOrtho(false, VIEWPORT.viewportWidth, VIEWPORT.viewportHeight);
-		_mapRenderer = new OrthogonalTiledMapRenderer(_mapMgr.getCurrentMap(), MapManager.UNIT_SCALE);
+		_mapRenderer = new OrthogonalTiledMapRenderer(mapMgr.getCurrentMap(), MapManager.UNIT_SCALE);
 		_mapRenderer.setView(_camera);
 		Gdx.app.debug(TAG, "UnitScale value is: " + _mapRenderer.getUnitScale());
 		_player = new Entity();
-		_player.init(_mapMgr.getPlayerStartUnitScaled().x, _mapMgr.getPlayerStartUnitScaled().y);
+		_player.init(mapMgr.getPlayerStartUnitScaled().x, mapMgr.getPlayerStartUnitScaled().y);
 		_currentPlayerSprite = _player.getFrameSprite();
 		_controller = new PlayerController(_player);
 		Gdx.input.setInputProcessor(_controller);
@@ -129,7 +129,7 @@ public class MainGameScreen implements Screen {
 	}
 
 	private boolean isCollisionWithMapLayer(Rectangle boundingBox) {
-		MapLayer mapCollisionLayer = _mapMgr.getCollisionLayer();
+		MapLayer mapCollisionLayer = mapMgr.getCollisionLayer();
 		if (mapCollisionLayer == null) {
 			return false;
 		}
@@ -146,7 +146,7 @@ public class MainGameScreen implements Screen {
 	}
 
 	private boolean updatePortalLayerActivation(Rectangle boundingBox) {
-		MapLayer mapPortalLayer = _mapMgr.getPortalLayer();
+		MapLayer mapPortalLayer = mapMgr.getPortalLayer();
 		if (mapPortalLayer == null) {
 			return false;
 		}
@@ -159,10 +159,10 @@ public class MainGameScreen implements Screen {
 					if (mapName == null) {
 						return false;
 					}
-					_mapMgr.setClosestStartPositionFromScaledUnits(_player.getCurrentPosition());
-					_mapMgr.loadMap(mapName);
-					_player.init(_mapMgr.getPlayerStartUnitScaled().x, _mapMgr.getPlayerStartUnitScaled().y);
-					_mapRenderer.setMap(_mapMgr.getCurrentMap());
+					mapMgr.setClosestStartPositionFromScaledUnits(_player.getCurrentPosition());
+					mapMgr.loadMap(mapName);
+					_player.init(mapMgr.getPlayerStartUnitScaled().x, mapMgr.getPlayerStartUnitScaled().y);
+					_mapRenderer.setMap(mapMgr.getCurrentMap());
 					Gdx.app.debug(TAG, "Portal Activated");
 					return true;
 				}

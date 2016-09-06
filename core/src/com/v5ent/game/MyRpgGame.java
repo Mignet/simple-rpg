@@ -1,21 +1,25 @@
 package com.v5ent.game;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/**
+ * 游戏入口<tt>游戏就是管理<b>Screen</b>并切换它们</tt>
+ * 
+ * @author Mignet
+ * 
+ */
 public class MyRpgGame extends Game {
-	public static final MainGameScreen _mainGameScreen = new MainGameScreen();
+
+	/**主游戏画面*/
+	public static final MainGameScreen mainGameScreen = new MainGameScreen();
 
 	@Override
 	public void create() {
-		setScreen(_mainGameScreen);
+		setScreen(mainGameScreen);
 	}
 
 	@Override
 	public void dispose() {
-		_mainGameScreen.dispose();
+		mainGameScreen.dispose();
 	}
 }
